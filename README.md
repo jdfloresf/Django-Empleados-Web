@@ -22,7 +22,7 @@ El proyecto sigue una arquitectura de aplicaciones dentro de Django, con las sig
 
 La configuración del proyecto se divide en tres archivos principales dentro de `empleado/settings`:
 
-1. **`base.py`:** Contiene la configuración base del proyecto, incluyendo las aplicaciones instaladas, middlewares, configuración de plantillas, validación de contraseñas, internacionalización, entre otros. Ejemplo de configuración:
+1. **`base.py`:** Contiene la configuración base del proyecto, incluyendo las aplicaciones instaladas, middlewares, configuración de plantillas, validación de contraseñas, internacionalización, entre otras variables globales.
 
     ```python
     BASE_DIR
