@@ -1,0 +1,109 @@
+Crear un proyecto de Django
+
+Se hace mediante el Comando
+    django-admin startproject <nombre del proyecto>
+--------------------------------------------------------------------------------
+Para tener un menor manejo del proyecto se crea un directorio llamado settings 
+para almacenar la configuración tanto local como de producción usando la base 
+del archivo settings.py, el directorio contiene 3 archivo
+    - base.py 
+    - local.py
+    - prod.py
+
+Para iniciar el servidor se puede usar el comando:
+    ´´´
+        python manage.py runserver --settings=<nombre_proyecto>.settings.local
+    ´´´
+o se puede editar la configuración del archivo manage.py, en la siguiente linea añadir el archivo local
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'empleado.settings.local')
+
+Comando para crear una aplicación
+
+    ´´´
+        python manage.py startapp <nombre>
+    ´´´
+o 
+    ´´´
+        django-admin startapp <nombre>
+    ´´´
+
+Es necesario agregar el path del archivo apps.py de cada aplicación creada, 
+ejemplo para la aplicación departamento por defecto tiene el nombre
+    name = 'departamento'
+hay que editarlo con la ruta correcta
+    name = 'apps.departamento'
+así con todas las aplicaciones que se crean
+
+--------------------------------------------------------------------------------
+Para tener un mejor manejo de los paquetes en Django, existe el modelo MVT
+Models: La parte que se encarga de la gestión de la DB
+Views: Donde se hace toda la logica del negocio
+Templates: Son los templates html para la perte visial de la pagina 
+
+Para no repetir codigo y poder reutilizarlo es necesario configuarar el directorio
+donde estaran todos los templates en el archivo base
+
+------------------------------------------------------------------------------
+
+Para generar los cambios dentro de la base de datos, se tiene que hacer las 
+migraciones con el comando 
+
+    python manage.py makemigrations
+
+Una vez que el modelo se crea en la DB se confirma con el comando 
+    python manage.py migrate
+
+-------------------------------------------------------------------------------
+Para poder utilizar el administrador de Django es necesario crear un usuario, se
+puede crear un usuario normal o un super usuario
+    python manage.py createsuperuser
+
+--------------------------------------------------------------------------------
+Crear BD con postgres
+
+Despues de intalar postgresql y de establecer la contraseña es necesario crear 
+una BD como el primer proyecto se llama empleado DB se llamara dbempleado, para
+hacerla se utiliza el comando desde la terminal de SQL Shell, se usaran los 
+parametros por defecto de postgres
+    - Server [localhost]
+    - Database [postgres]
+    - Port [5432]
+    - Username [postgres]
+
+    CREATE DATABASE <nombre_db>;
+
+Despues se abra la DB con el comando
+    \c <nombre_db>
+
+Dentro de la DB se crea un usuario con el comando
+    ALTER ROLE <nombre_usuario> WITH PASSWORD 'password';
+--------------------------------------------------------------------------------
+
+Para configurar las DB con Django es necesario editar el archivo local.py o prod.py
+dependiendo del entorno de trabajo, con lo siguiente:
+
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'db_name',
+        'USER': 'user',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
+--------------------------------------------------------------------------------
+Despues de hacer la configuración se hacen las migraciones a la nueva DB, para 
+poder acceder de nuevo al administrador de django se tiene que crear un nuevo
+usuario ya que la instancia del usuario creado anteriormente esta almacenado en
+la DB por defecto de django.
+--------------------------------------------------------------------------------
+
+Clase Meta de Django
+No es una clas en si misma sino que funciona como una configuración de los 
+metadatos del modelo, como el nombre de la tabla de la DB, el orden por defecto, 
+etc, algunas de las opciones son:
+    - verbose_name
+    - verbose_name_plural
+    - ordering
+    - unique_together
