@@ -1,7 +1,6 @@
 # Sistema de Gestión de Empleados
 
 Este proyecto es una aplicación web creada con Django para gestionar empleados dentro de una empresa. La interfaz de usuario utiliza plantillas y estilos de Foundation Zurb, proporcionando un diseño moderno y responsivo.
-![empleados](https://res.cloudinary.com/dqa2kd0vc/image/upload/v1723770021/screencapture-127-0-0-1-8000-2024-08-15-18_58_50_xwjor9.png)
 
 ## Características
 
